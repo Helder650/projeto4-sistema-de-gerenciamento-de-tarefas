@@ -4,33 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerenciador de Tarefas</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
 </head>
 <body>
 
-<div class="container">
+<div class="app">
 
-  <h1>📋 Gerenciador de Tarefas</h1>
+  <header>
+    <h1>
+      <i class="fa-regular fa-clipboard"></i>
+      Gerenciador de Tarefas
+    </h1>
+  </header>
 
-  <div class="input-area">
+  <main>
 
-    <input
-      type="text"
-      id="taskInput"
-      placeholder="Digite uma tarefa..."
-    >
+    <section class="nova-tarefa">
 
-    <button id="addBtn">
-      Adicionar
-    </button>
+      <h2>Nova Tarefa</h2>
 
-  </div>
+      <div class="input-group">
 
-  <p id="contador">
-    Tarefas: 0
-  </p>
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="Digite uma tarefa..."
+        >
 
-  <ul id="lista"></ul>
+        <button id="addBtn">
+          Adicionar
+        </button>
+
+      </div>
+
+    </section>
+
+    <section class="tarefas">
+
+      <div class="topo-lista">
+
+        <h2>Suas Tarefas</h2>
+
+        <div class="estatisticas">
+
+          <span>
+            Total:
+            <strong id="total">0</strong>
+          </span>
+
+          <span>
+            Pendentes:
+            <strong id="pendentes">0</strong>
+          </span>
+
+          <span>
+            Concluídas:
+            <strong id="concluidas">0</strong>
+          </span>
+
+        </div>
+
+      </div>
+
+      <div id="lista"></div>
+
+    </section>
+
+    <footer>
+      Desenvolvido com ❤️
+    </footer>
+
+  </main>
 
 </div>
 

@@ -13,7 +13,9 @@ function adicionarTarefa(lista, texto) {
 }
 
 function concluirTarefa(tarefa) {
+
   tarefa.concluida = true;
+
   return tarefa;
 }
 

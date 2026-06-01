@@ -1,49 +1,98 @@
 const tarefas = [];
 
 const input = document.getElementById("taskInput");
-const lista = document.getElementById("lista");
-const contador = document.getElementById("contador");
 const botao = document.getElementById("addBtn");
+const lista = document.getElementById("lista");
+
+const total = document.getElementById("total");
+const pendentes = document.getElementById("pendentes");
+const concluidas = document.getElementById("concluidas");
+
+function atualizarEstatisticas() {
+
+  total.textContent = tarefas.length;
+
+  pendentes.textContent =
+    tarefas.filter(t => !t.concluida).length;
+
+  concluidas.textContent =
+    tarefas.filter(t => t.concluida).length;
+}
 
 function renderizar() {
 
   lista.innerHTML = "";
 
-  tarefas.forEach((tarefa) => {
+  tarefas.forEach((tarefa, index) => {
 
-    const li = document.createElement("li");
+    const div = document.createElement("div");
 
-    if (tarefa.concluida) {
-      li.classList.add("concluida");
-    }
+    div.className =
+      `tarefa ${tarefa.concluida ? "concluida" : ""}`;
 
-    li.innerHTML = `
-      <span>${tarefa.texto}</span>
-      <button>Concluir</button>
+    div.innerHTML = `
+      <div class="esquerda">
+
+        <input
+          type="checkbox"
+          ${tarefa.concluida ? "checked" : ""}
+        >
+
+        <span class="texto">
+          ${tarefa.texto}
+        </span>
+
+      </div>
+
+      <div class="acoes">
+
+        <span class="status ${
+          tarefa.concluida
+            ? "finalizada"
+            : "pendente"
+        }">
+          ${
+            tarefa.concluida
+              ? "Concluída"
+              : "Pendente"
+          }
+        </span>
+
+        <button class="excluir">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+
+      </div>
     `;
 
-    li.querySelector("button")
-      .addEventListener("click", () => {
+    div.querySelector("input")
+      .addEventListener("change", () => {
 
-        tarefa.concluida = true;
+        tarefa.concluida =
+          !tarefa.concluida;
 
         renderizar();
       });
 
-    lista.appendChild(li);
+    div.querySelector(".excluir")
+      .addEventListener("click", () => {
+
+        tarefas.splice(index, 1);
+
+        renderizar();
+      });
+
+    lista.appendChild(div);
   });
 
-  contador.textContent =
-    `Tarefas: ${tarefas.length}`;
+  atualizarEstatisticas();
 }
 
 botao.addEventListener("click", () => {
 
   const texto = input.value.trim();
 
-  if (texto === "") {
-    return;
-  }
+  if (!texto) return;
 
   tarefas.push({
     texto,
@@ -54,3 +103,12 @@ botao.addEventListener("click", () => {
 
   renderizar();
 });
+
+input.addEventListener("keypress", (e) => {
+
+  if (e.key === "Enter") {
+    botao.click();
+  }
+});
+
+renderizar();

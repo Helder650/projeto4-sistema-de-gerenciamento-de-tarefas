@@ -10,10 +10,12 @@ describe("Sistema de tarefas", () => {
     const lista = [];
 
     const resultado =
-      adicionarTarefa(lista, "Estudar Jest");
+      adicionarTarefa(
+        lista,
+        "Estudar Jest"
+      );
 
     expect(resultado).toBe(true);
-
     expect(lista.length).toBe(1);
   });
 
@@ -25,7 +27,6 @@ describe("Sistema de tarefas", () => {
       adicionarTarefa(lista, "");
 
     expect(resultado).toBe(false);
-
     expect(lista.length).toBe(0);
   });
 
@@ -38,7 +39,7 @@ describe("Sistema de tarefas", () => {
 
     concluirTarefa(tarefa);
 
-    expect(tarefa.concluida).toBe(true);
+    expect(tarefa.concluida)
+      .toBe(true);
   });
-
 });
